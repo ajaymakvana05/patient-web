@@ -65,7 +65,7 @@ const AdminRegistration = () => {
 
   return (
     <div className="grid grid-cols-2">
-      <div className="p-6 bg-white  shadow-lg">
+      <div className="p-6 bg-white  shadow-lg max-w-[600px] m-auto mt-10">
         <h2 className="text-3xl font-bold mb-6">Registration</h2>
         <form onSubmit={handleSubmit} noValidate>
           <div className="flex gap-4 mb-4">
