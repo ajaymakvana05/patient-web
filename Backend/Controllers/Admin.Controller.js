@@ -96,6 +96,29 @@ const resetpassword = async (req, res) => {
     }
 };
 
+// admin profile
+const AdminProfile = async (req, res) => {
+    try {
+        let admindata = await AdmintModel.findById({ _id: req.body.AdminID })
+        res.json(admindata)
+    } catch (error) {
+        res.status(500).json({ msg: error.message })
+    }
+}
+
+// admin profile Update
+const AdminUpdate = async (req, res) => {
+    try {
+        let { id } = req.params
+        let data = await AdmintModel.findByIdAndUpdate(id, req.body,{new:true})
+        res.json({ message: "update succesfully", data })
+
+    } catch (error) {
+        res.status(500).json({ msg: error.message })
+    }
+
+}
+
 const addHospital=async(req,res)=>{
     try {
         let admin = await AdmintModel.findById({ _id: req.body.AdminID })
@@ -138,4 +161,4 @@ const AddDoctor = async (req, res) => {
     }
 };
 
-module.exports = { signup, login, resetpassword ,addHospital,AddDoctor}
+module.exports = { signup, login, resetpassword ,addHospital,AddDoctor,AdminProfile,AdminUpdate}
