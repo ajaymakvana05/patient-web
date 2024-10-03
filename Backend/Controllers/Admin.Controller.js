@@ -1,20 +1,29 @@
 const bcrypt = require("bcrypt")
 const jwt = require("jsonwebtoken")
+require('dotenv').config();
 const AdmintModel = require("../Models/Admin.Schema")
 const HospitalModel = require("../Models/Hospital.Schema")
 const DoctorModel = require("../Models/Doctor.schema")
 
 const signup = async (req, res) => {
     try {
-        const { firstname, lastname, email, phonenumber, country, state, city,  password, confirmpassword, } = req.body
-        const user = await AdmintModel.findOne({ email: email })
+        const { firstname, lastname, email, phonenumber, country, state, city, password, confirmpassword } = req.body;
 
+        // Check if the user already exists
+        const existingUser = await AdmintModel.findOne({ email: email });
+        if (existingUser) {
+            return res.status(400).json({ msg: "Email already exists" });
+        }
+
+        // Check if passwords match
         if (password !== confirmpassword) {
             return res.status(400).json({ msg: "Passwords do not match" });
         }
 
-        const hashedPassword = await bcrypt.hash(password, 5);
+        // Hash the password
+        const hashedPassword = await bcrypt.hash(password, 10); // Use 10 as the salt rounds for better security
 
+        // Create a new user
         const newUser = new AdmintModel({
             firstname,
             lastname,
@@ -23,39 +32,50 @@ const signup = async (req, res) => {
             country,
             state,
             city,
-            password: hashedPassword
+            password: hashedPassword,
         });
 
+        // Save the new user to the database
         await newUser.save();
 
+        // Respond with success message
         res.status(200).json({ msg: "User registered successfully", newUser });
     } catch (error) {
         res.status(500).json({ msg: "Server error", error: error.message });
     }
 };
 
+
 const login = async (req, res) => {
     try {
         const { email, password } = req.body;
-        let data = await AdmintModel.findOne({ email: email });
-        
-        if (data) {
-            const isMatch = await bcrypt.compare(password, data.password);
-            if (isMatch) {
-                let Admintoken = jwt.sign({ id: data._id }, process.env.AdminSecrate, { expiresIn: '1h' });
-                res.cookie("Admintoken", Admintoken).cookie("id", data._id);
-                res.status(200).json({ message: "Successfully Login", data, Admintoken });
-            } else {
-                res.status(400).json({ message: "Password incorrect" });
-            }
-        } else {
-            res.status(400).json({ message: "User not found" });
+
+        if (!email || !password) {
+            return res.status(400).json({ message: "Email and password are required" });
         }
+
+        let data = await AdmintModel.findOne({ email: email });
+        if (!data) {
+            return res.status(400).json({ message: "User not found" });
+        }
+
+        const isMatch = await bcrypt.compare(password, data.password);
+        if (!isMatch) {
+            return res.status(400).json({ message: "Password incorrect" });
+        }
+
+        let Admintoken = jwt.sign({ id: data._id }, process.env.AdminSecrate, { expiresIn: '1h' });
+
+        res.cookie("Admintoken", Admintoken).cookie("id", data._id);
+
+        res.status(200).json({ message: "Successfully Login", data, Admintoken });
+
     } catch (error) {
         console.error("Login error:", error);
         return res.status(500).json({ message: "Internal server error" });
     }
 };
+
 
 const resetpassword = async (req, res) => {
     try {
@@ -67,7 +87,6 @@ const resetpassword = async (req, res) => {
         }
         else {
 
-            // Compare oldpassword with the stored hashed password
             const isMatch = await bcrypt.compare(oldpassword, user.password);
 
             if (!isMatch) {
@@ -75,16 +94,13 @@ const resetpassword = async (req, res) => {
             }
             else {
 
-                // Check if newpassword matches confirmpassword
                 if (newpassword !== confirmpassword) {
                     return res.status(400).json({ msg: "New password and confirm password do not match" });
                 }
                 else {
 
-                    // Hash the new password before saving it
                     const hashedNewPassword = await bcrypt.hash(newpassword, 10);
 
-                    // Update the password in the database
                     await AdmintModel.findByIdAndUpdate(user._id, { password: hashedNewPassword });
 
                     res.status(200).json({ msg: "Password reset successfully" });
@@ -96,7 +112,7 @@ const resetpassword = async (req, res) => {
     }
 };
 
-// admin profile
+
 const AdminProfile = async (req, res) => {
     try {
         let admindata = await AdmintModel.findById({ _id: req.body.AdminID })
@@ -106,11 +122,10 @@ const AdminProfile = async (req, res) => {
     }
 }
 
-// admin profile Update
 const AdminUpdate = async (req, res) => {
     try {
         let { id } = req.params
-        let data = await AdmintModel.findByIdAndUpdate(id, req.body,{new:true})
+        let data = await AdmintModel.findByIdAndUpdate(id, req.body, { new: true })
         res.json({ message: "update succesfully", data })
 
     } catch (error) {
@@ -119,7 +134,7 @@ const AdminUpdate = async (req, res) => {
 
 }
 
-const addHospital=async(req,res)=>{
+const addHospital = async (req, res) => {
     try {
         let admin = await AdmintModel.findById({ _id: req.body.AdminID })
         let data = await HospitalModel.create(req.body)
@@ -130,7 +145,6 @@ const addHospital=async(req,res)=>{
         res.json({ msg: error.message })
     }
 }
-
 
 
 const AddDoctor = async (req, res) => {
@@ -161,4 +175,4 @@ const AddDoctor = async (req, res) => {
     }
 };
 
-module.exports = { signup, login, resetpassword ,addHospital,AddDoctor,AdminProfile,AdminUpdate}
+module.exports = { signup, login, resetpassword, addHospital, AddDoctor, AdminProfile, AdminUpdate }
