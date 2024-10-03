@@ -6,13 +6,8 @@ const DoctorModel = require("../Models/Doctor.schema")
 
 const signup = async (req, res) => {
     try {
-        const { firstname, lastname, email, phonenumber, country, state, city, password, confirmpassword } = req.body;
-
-
-        const user = await AdmintModel.findOne({ email: email });
-        if (user) {
-            return res.status(400).json({ msg: "This email already exists" });
-        }
+        const { firstname, lastname, email, phonenumber, country, state, city,  password, confirmpassword, } = req.body
+        const user = await AdmintModel.findOne({ email: email })
 
         if (password !== confirmpassword) {
             return res.status(400).json({ msg: "Passwords do not match" });
@@ -41,23 +36,21 @@ const signup = async (req, res) => {
 
 const login = async (req, res) => {
     try {
-        const { emailOrPhone, password } = req.body;
-        const user = await AdmintModel.findOne({
-            $or: [{ email: emailOrPhone }, { phone: emailOrPhone }]
-        });
-
-        if (!user) {
-            return res.status(404).json({ message: "User not found" });
+        const { email, password } = req.body;
+        let data = await AdmintModel.findOne({ email: email });
+        
+        if (data) {
+            const isMatch = await bcrypt.compare(password, data.password);
+            if (isMatch) {
+                let Admintoken = jwt.sign({ id: data._id }, process.env.AdminSecrate, { expiresIn: '1h' });
+                res.cookie("Admintoken", Admintoken).cookie("id", data._id);
+                res.status(200).json({ message: "Successfully Login", data, Admintoken });
+            } else {
+                res.status(400).json({ message: "Password incorrect" });
+            }
+        } else {
+            res.status(400).json({ message: "User not found" });
         }
-
-        const isMatch = await bcrypt.compare(password, user.password);
-        if (!isMatch) {
-            return res.status(401).json({ message: "Incorrect password" });
-        }
-
-        const token = jwt.sign({ id: user._id }, process.env.AdminSecrate, { expiresIn: '1h' });
-        res.cookie("Admintoken", token, { httpOnly: true, secure: process.env.NODE_ENV === "production" });
-        res.status(200).json({ message: "Successfully logged in", token });
     } catch (error) {
         console.error("Login error:", error);
         return res.status(500).json({ message: "Internal server error" });
@@ -103,7 +96,7 @@ const resetpassword = async (req, res) => {
     }
 };
 
-const addHospital = async (req, res) => {
+const addHospital=async(req,res)=>{
     try {
         let admin = await AdmintModel.findById({ _id: req.body.AdminID })
         let data = await HospitalModel.create(req.body)
@@ -114,6 +107,7 @@ const addHospital = async (req, res) => {
         res.json({ msg: error.message })
     }
 }
+
 
 
 const AddDoctor = async (req, res) => {
@@ -144,4 +138,4 @@ const AddDoctor = async (req, res) => {
     }
 };
 
-module.exports = { signup, login, resetpassword, addHospital, AddDoctor }
+module.exports = { signup, login, resetpassword ,addHospital,AddDoctor}

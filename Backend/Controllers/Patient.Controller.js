@@ -107,5 +107,28 @@ const resetpassword = async (req, res) => {
 };
 
 
+// patient profile
+const PatientProfile = async (req, res) => {
+    try {
+        let patientdata = await PatientModel.findById({ _id: req.body.PatientID })
+        res.json(patientdata)
+    } catch (error) {
+        res.state(500).json({ msg: error.message })
+    }
+}
 
-module.exports = { signup, login, resetpassword }
+// patient profile Update
+const PatientUpdate = async (req, res) => {
+    try {
+        let { id } = req.params
+        let data = await PatientModel.findByIdAndUpdate(id, req.body,{new:true})
+        res.json({ message: "update succesfully", data })
+
+    } catch (error) {
+        res.status(500).json({ msg: error.message })
+    }
+
+}
+
+
+module.exports = { signup, login, resetpassword,PatientProfile,PatientUpdate }

@@ -60,4 +60,27 @@ const resetpassword = async (req, res) => {
 };
 
 
-module.exports = { login ,resetpassword}
+// doctor profile
+const DoctorProfile = async (req, res) => {
+    try {
+        let doctordata = await DoctorModel.findById({ _id: req.body.DoctorID})
+        res.json(doctordata)
+    } catch (error) {
+        res.state(500).json({ msg: error.message })
+    }
+}
+
+// doctor profile Update
+const DoctorUpdate = async (req, res) => {
+    try {
+        let { id } = req.params
+        let data = await DoctorModel.findByIdAndUpdate(id, req.body,{new:true})
+        res.json({ message: "update succesfully", data })
+
+    } catch (error) {
+        res.status(500).json({ msg: error.message })
+    }
+
+}
+
+module.exports = { login ,resetpassword,DoctorProfile,DoctorUpdate}
