@@ -88,4 +88,28 @@ const AuthPatientOrAdmin = (req, res, next) => {
     }
 };
 
-module.exports = { Auth, AdminAuth,DoctorAuth ,AuthDoctorOrAdmin,AuthPatientOrAdmin};
+const AuthPatientOrDoctor = (req, res, next) => {
+    let { token, Doctortoken } = req.cookies;
+
+    if (token) {  // Check for Patient token
+        try {
+            let decode = jwt.verify(token, process.env.jwtSecrate);
+            req.body.PatientID = decode.id;  // Attach PatientID to request body
+            next();  // Proceed to the next middleware or route handler
+        } catch (error) {
+            return res.status(401).json("Invalid Patient token signature");
+        }
+    } else if (Doctortoken) {  // Check for Admin token
+        try {
+            let decode = jwt.verify(Doctortoken, process.env.DoctorSecrate);
+            req.body.DoctorID = decode.id;  // Set DoctorID to request body
+            next();  // Proceed to next middleware or route handler
+        } catch (error) {
+            return res.status(401).json("Invalid Admin token signature");
+        }
+    } else {
+        res.status(403).json("You are not authorized");
+    }
+};
+
+module.exports = { Auth, AdminAuth,DoctorAuth ,AuthDoctorOrAdmin,AuthPatientOrAdmin,AuthPatientOrDoctor};
