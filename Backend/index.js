@@ -1,5 +1,6 @@
 require("dotenv").config()
 const express=require("express");
+const cors = require("cors");
 const cookie=require("cookie-parser");
 const connect = require("./Config/db");
 const PatientRoute = require("./Routes/Patient.Route");
@@ -8,6 +9,7 @@ const DoctorRoute = require("./Routes/Doctor.Route");
 const app=express()
 app.use(express.urlencoded({extended:true}))
 app.use(express.json())
+app.use(cors());
 app.use(cookie())
 
 app.use("/patient",PatientRoute)

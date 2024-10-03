@@ -27,6 +27,7 @@ const AdminAuth = (req, res, next) => {
         res.status(403).json("You are not authorized");
     }
 };
+
 const DoctorAuth = (req, res, next) => {
     let { Doctortoken } = req.cookies;
       

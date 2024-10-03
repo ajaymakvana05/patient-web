@@ -1,13 +1,15 @@
-import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { useState } from "react";
+import { Link,useNavigate  } from "react-router-dom";
 import RightSideContent from "./RightSideContent";
-// import EyeSlashIcon from "../assets/images/eye-slash.svg";
-// import EyeIcon from "../assets/images/eye.svg";
+
+
 const Login = () => {
   const [formData, setFormData] = useState({
     emailOrPhone: "",
     password: "",
   });
+
+  const navigate = useNavigate();
   const [errors, setErrors] = useState({});
   const [showPassword, setShowPassword] = useState(false);
 
@@ -20,7 +22,7 @@ const Login = () => {
 
   const emailPattern = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async(e) => {
     e.preventDefault();
     const newErrors = {};
 
@@ -36,10 +38,33 @@ const Login = () => {
       newErrors.password = "Password must be at least 6 characters long.";
     }
 
-    if (Object.keys(newErrors).length > 0) {
-      setErrors(newErrors);
-    } else {
-      console.log("Form submitted successfully:", formData);
+    // if (Object.keys(newErrors).length > 0) {
+    //   setErrors(newErrors);
+    // } else {
+    //   console.log("Form submitted successfully:", formData);
+    // }
+
+    try {
+      const response = await fetch("http://localhost:8090/admin/login", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(formData),
+      });
+
+      const result = await response.json();
+
+      if (response.ok) {
+        localStorage.setItem("token", result.token);
+        console.log("Login successful:", result);
+        navigate("/adminDashboard"); 
+      } else {
+        setErrors({ apiError: result.message || "Login failed, please try again." });
+      }
+    } catch (error) {
+      console.error("Network error:", error);
+      setErrors({ apiError: "Network error occurred, please try again." });
     }
   };
 
