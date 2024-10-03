@@ -6,7 +6,7 @@ const DoctorModel = require("../Models/Doctor.schema")
 
 const signup = async (req, res) => {
     try {
-        const { firstname, lastname, email, phonenumber, country, state, city,  password, confirmpassword, } = req.body
+        const { firstname, lastname, email, phonenumber, country, state, city, password, confirmpassword, } = req.body
         const user = await AdmintModel.findOne({ email: email })
 
         if (password === confirmpassword) {
@@ -44,7 +44,7 @@ const login = async (req, res) => {
     try {
         const { email, password } = req.body;
         let data = await AdmintModel.findOne({ email: email });
-        
+
         if (data) {
             const isMatch = await bcrypt.compare(password, data.password);
             if (isMatch) {
@@ -102,46 +102,70 @@ const resetpassword = async (req, res) => {
     }
 };
 
-const addHospital=async(req,res)=>{
+// admin profile
+const AdminProfile = async (req, res) => {
     try {
-        let admin=await AdmintModel.findById({_id:req.body.AdminID})
-        let data=await HospitalModel.create(req.body)
+        let admindata = await AdmintModel.findById({ _id: req.body.AdminID })
+        res.json(admindata)
+    } catch (error) {
+        res.state(500).json({ msg: error.message })
+    }
+}
+
+// admin profile Update
+const AdminUpdate = async (req, res) => {
+    try {
+        let { id } = req.params
+        let data = await AdmintModel.findByIdAndUpdate(id, req.body,{new:true})
+        res.json({ message: "update succesfully", data })
+
+    } catch (error) {
+        res.status(500).json({ msg: error.message })
+    }
+
+}
+
+// add hospital
+const addHospital = async (req, res) => {
+    try {
+        let admin = await AdmintModel.findById({ _id: req.body.AdminID })
+        let data = await HospitalModel.create(req.body)
         admin.hospital.push(data._id)
         admin.save()
         res.json(data)
     } catch (error) {
-        res.json({msg:error.message})
+        res.json({ msg: error.message })
     }
 }
 
-
+// add doctor
 
 const AddDoctor = async (req, res) => {
     try {
-      let doctorImage = req.files['DoctorImage'] ? req.files['DoctorImage'][0] : null;
-      let doctorSignature = req.files['DoctorSignature'] ? req.files['DoctorSignature'][0] : null;
-  
-      let doctor = new DoctorModel(req.body);
-      
-      if (doctorImage) {
-        doctor.DoctorImage = {
-          url: doctorImage.path,
-          filename: doctorImage.filename,
-        };
-      }
-  
-      if (doctorSignature) {
-        doctor.DoctorSignature = {
-          url: doctorSignature.path,
-          filename: doctorSignature.filename,
-        };
-      }
-  
-      await doctor.save();
-      res.status(200).json({ msg: "Doctor created successfully", doctor });
-    } catch (error) {
-      res.status(500).json({ msg: error.message });
-    }
-  };
+        let doctorImage = req.files['DoctorImage'] ? req.files['DoctorImage'][0] : null;
+        let doctorSignature = req.files['DoctorSignature'] ? req.files['DoctorSignature'][0] : null;
 
-module.exports = { signup, login, resetpassword ,addHospital,AddDoctor}
+        let doctor = new DoctorModel(req.body);
+
+        if (doctorImage) {
+            doctor.DoctorImage = {
+                url: doctorImage.path,
+                filename: doctorImage.filename,
+            };
+        }
+
+        if (doctorSignature) {
+            doctor.DoctorSignature = {
+                url: doctorSignature.path,
+                filename: doctorSignature.filename,
+            };
+        }
+
+        await doctor.save();
+        res.status(200).json({ msg: "Doctor created successfully", doctor });
+    } catch (error) {
+        res.status(500).json({ msg: error.message });
+    }
+};
+
+module.exports = { signup, login, resetpassword, addHospital, AddDoctor, AdminProfile ,AdminUpdate}
