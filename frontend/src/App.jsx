@@ -8,7 +8,6 @@ import AdminRegistration from "./pages/admin/adminRegistration";
 import ProfileDashboard from "./pages/admin/ProfileDashboard";
 import Profile from "./Components/Profile";
 import { ToastContainer } from "react-toastify";
-<<<<<<< HEAD
 import "react-toastify/dist/ReactToastify.css";
 import ChangePassword from "./Components/ChangePassword";
 import EditProfileForm from "./Components/EditProfileForm";
@@ -18,10 +17,8 @@ import DoctorDashboard from "./pages/admin/DoctorDashboard";
 import PatientDashboard from "./pages/admin/PatientDashboard";
 import BillingDashboard from "./pages/admin/BillingDashboard";
 import ReportingDashboard from "./pages/admin/ReportingDashboard";
-=======
 import 'react-toastify/dist/ReactToastify.css';
-import ChangePassword from "./Components/ChangePassword";
->>>>>>> 062936cfc39a0ab0786387c2b041427f55dfecf5
+// import ChangePassword from "./Components/ChangePassword";
 
 const App = () => {
   return (
@@ -29,7 +26,7 @@ const App = () => {
       <div className="main-layout">
         <ToastContainer
           position="top-right" // or "bottom-right" for bottom placement
-          autoClose={2000} // Auto close after 3 seconds
+          autoClose={1000} // Auto close after 3 seconds
           hideProgressBar={false} // Show progress bar (optional)
           newestOnTop={true} // Newest notifications on top
           closeOnClick // Close on click

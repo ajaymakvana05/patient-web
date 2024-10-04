@@ -36,7 +36,7 @@ const Sidebar = () => {
               className={({ isActive }) =>
                 `flex items-center space-x-2 px-4 py-2 rounded-md transition-colors duration-300 ${
                   isActive
-                    ? "text-blue bg-blue"
+                    ? "text-blue "
                     : "text-gray hover:text-blue hover:bg-[]"
                 }`
               }

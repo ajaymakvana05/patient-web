@@ -1,6 +1,8 @@
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import RightSideContent from "./RightSideContent";
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const Register = () => {
   const navigate = useNavigate();
@@ -90,6 +92,7 @@ const Register = () => {
 
         const result = await response.json();
         if (response.ok) {
+          toast.success("Registration successful! Redirecting...");
           navigate("/login");
         } else {
           setErrors({ apiError: result.msg || "Something went wrong!" });

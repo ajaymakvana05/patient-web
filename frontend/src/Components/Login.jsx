@@ -2,11 +2,7 @@ import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import RightSideContent from "./RightSideContent";
 import { toast } from "react-toastify";
-<<<<<<< HEAD
 import "react-toastify/dist/ReactToastify.css";
-=======
-import 'react-toastify/dist/ReactToastify.css';
->>>>>>> 062936cfc39a0ab0786387c2b041427f55dfecf5
 
 const Login = () => {
   const [formData, setFormData] = useState({
@@ -24,10 +20,7 @@ const Login = () => {
     setErrors((prevErrors) => ({ ...prevErrors, [id]: "" }));
   };
 
-<<<<<<< HEAD
-=======
 
->>>>>>> 062936cfc39a0ab0786387c2b041427f55dfecf5
   const emailPattern = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
 
   const handleSubmit = async (e) => {
@@ -62,7 +55,6 @@ const Login = () => {
       const result = await response.json();
 
       if (response.ok) {
-<<<<<<< HEAD
         //   localStorage.setItem("token", result.token);
         //   console.log("Login successful:", result);
         //   navigate("/adminDashboard");
@@ -70,7 +62,7 @@ const Login = () => {
         //   setErrors({
         //     apiError: result.message || "Login failed, please try again.",
         //   });
-=======
+
 
       //   localStorage.setItem("token", result.token);
       //   console.log("Login successful:", result);
@@ -79,20 +71,17 @@ const Login = () => {
       //   setErrors({
       //     apiError: result.message || "Login failed, please try again.",
       //   });
->>>>>>> 062936cfc39a0ab0786387c2b041427f55dfecf5
+
 
         localStorage.setItem("token", result.Admintoken);
         toast.success("Login successful! Redirecting...");
         navigate("/profiledashboard");
       } else {
         toast.error(result.message || "Login failed, please try again.");
-<<<<<<< HEAD
         setErrors({
           apiError: result.message || "Login failed, please try again.",
         });
-=======
         setErrors({ apiError: result.message || "Login failed, please try again." });
->>>>>>> 062936cfc39a0ab0786387c2b041427f55dfecf5
       }
     } catch (error) {
       console.error("Network error:", error);
