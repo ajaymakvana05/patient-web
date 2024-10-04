@@ -35,5 +35,11 @@ export default {
       },
     },
   },
+  variants: {
+    extend: {
+      textColor: ["hover", "focus", "active"],
+      backgroundColor: ["hover", "focus", "active"],
+    },
+  },
   plugins: [],
 };
