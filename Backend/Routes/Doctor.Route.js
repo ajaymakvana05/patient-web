@@ -1,5 +1,5 @@
 const { Router } = require("express")
-const { login, resetpassword, DoctorProfile, DoctorUpdate, PatientRecord, SinglePatient } = require("../Controllers/Doctor.Controller")
+const { login, resetpassword, DoctorProfile, DoctorUpdate, PatientRecord, SinglePatient, AppointmentRecord } = require("../Controllers/Doctor.Controller")
 const { DoctorAuth } = require("../Middlewares/auth")
 const DoctorRoute = Router()
 
@@ -14,8 +14,15 @@ DoctorRoute.get("/profile", DoctorAuth, DoctorProfile)
 DoctorRoute.patch("/update/:id", DoctorAuth, DoctorUpdate)
 
 
-//PatientRecord
+//Appointment Record
+DoctorRoute.get("/AppointmentRecord", DoctorAuth, AppointmentRecord)
+
+//Patient Record
 DoctorRoute.get("/PatientRecord", DoctorAuth, PatientRecord)
-DoctorRoute.get("/SinglePatient/:PatientID", DoctorAuth, SinglePatient)
+// single patient details
+DoctorRoute.get("/SinglePatient/:id",DoctorAuth,SinglePatient);
+
+
+
 
 module.exports = DoctorRoute

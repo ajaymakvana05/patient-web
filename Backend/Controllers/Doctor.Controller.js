@@ -5,8 +5,8 @@ const PatientModel = require("../Models/PatientSchema");
 
 const login = async (req, res) => {
     try {
-        const { email, password } = req.body;
-        let data = await DoctorModel.findOne({ email: email });
+        const { DoctorEmail, password } = req.body;
+        let data = await DoctorModel.findOne({ DoctorEmail: DoctorEmail });
 
         if (data) {
             if (password === data.password) {
@@ -65,7 +65,7 @@ const resetpassword = async (req, res) => {
 // doctor profile
 const DoctorProfile = async (req, res) => {
     try {
-        let doctordata = await DoctorModel.findById({ _id: req.body.DoctorID})
+        let doctordata = await DoctorModel.findById({ _id: req.body.DoctorID })
         res.json(doctordata)
     } catch (error) {
         res.state(500).json({ msg: error.message })
@@ -76,7 +76,7 @@ const DoctorProfile = async (req, res) => {
 const DoctorUpdate = async (req, res) => {
     try {
         let { id } = req.params
-        let data = await DoctorModel.findByIdAndUpdate(id, req.body,{new:true})
+        let data = await DoctorModel.findByIdAndUpdate(id, req.body, { new: true })
         res.json({ message: "update succesfully", data })
 
     } catch (error) {
@@ -86,31 +86,44 @@ const DoctorUpdate = async (req, res) => {
 }
 
 
-// patient record
+// Appointment Record
+const AppointmentRecord = async (req, res) => {
+    try {
+
+        const appointmentHistory = await AppointmentModel.find({ DoctorID: req.body.DoctorID })
+            .populate('PatientID', 'firstname lastname age gender') // Populates patient information
+
+        res.status(200).json({ message: 'Doctor appointment history', data: appointmentHistory });
+    } catch (error) {
+        res.status(500).json({ message: error.message });
+    }
+};
+
+
+//PatientRecord
+
 const PatientRecord = async (req, res) => {
     try {
-  
-      const appointmentHistory = await AppointmentModel.find({ DoctorID:req.body.DoctorID })
-        .populate('PatientID', 'firstname lastname age gender') // Populates patient information
-        
-      res.status(200).json({ message: 'Doctor appointment history', data: appointmentHistory });
+        let Patient = await PatientModel.find()
+        res.json(Patient)
     } catch (error) {
-      res.status(500).json({ message: error.message });
-    }
-  };
+        res.status(500).json({ message: error.message });
+    }
+}
 
-  const SinglePatient=async(req,res)=>{
+// single page patient details
+const SinglePatient = async (req, res) => {
     try {
-        let{PatientID}=req.params
-        const singlepatient=await AppointmentModel.findOne({PatientID})
-        .populate({ path: "PatientID" }) 
-        .populate({ path: "DoctorID", select: "DoctorName" });
-        res.json(singlepatient)
+        let { id } = req.params;
+        const singlepatient = await PatientModel.findById(id)
+            .populate({ path: "AppointmentID" });
+        res.json(singlepatient);
     } catch (error) {
         console.log(error);
-        
-        res.status(500).json({ message: error.message });
-    }
-  }
 
-module.exports = { login ,resetpassword,DoctorProfile,DoctorUpdate,PatientRecord,SinglePatient}
+        res.status(500).json({ message: error.message });
+    }
+};
+
+
+module.exports = { login, resetpassword, DoctorProfile, DoctorUpdate, PatientRecord, SinglePatient, AppointmentRecord }
