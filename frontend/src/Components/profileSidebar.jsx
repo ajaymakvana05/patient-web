@@ -18,13 +18,35 @@ const ProfileSidebar = () => {
 
         <ul className="space-y-4">
           <li className="flex items-center p-3 bg-gray-100 rounded-md hover:bg-gray-200">
-            <Link to="/profile" className="text-blue-600 font-medium">
+            <Link
+              to="/profiledashboard/profile"
+              className="text-blue-600 font-medium"
+            >
               Profile
             </Link>
           </li>
           <li className="flex items-center p-3 bg-gray-100 rounded-md hover:bg-gray-200">
-            <Link to="/change-password" className="text-gray-600 font-medium">
+            <Link
+              to="/profiledashboard/changepassword"
+              className="text-gray-600 font-medium"
+            >
               Change Password
+            </Link>
+          </li>
+          <li className="flex items-center p-3 bg-gray-100 rounded-md hover:bg-gray-200">
+            <Link
+              to="/profiledashboard/TermsAndConditions"
+              className="text-gray-600 font-medium"
+            >
+              Terms & Condition
+            </Link>
+          </li>
+          <li className="flex items-center p-3 bg-gray-100 rounded-md hover:bg-gray-200">
+            <Link
+              to="/profiledashboard/privacypolicy"
+              className="text-gray-600 font-medium"
+            >
+              Privacy Policy
             </Link>
           </li>
         </ul>

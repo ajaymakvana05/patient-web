@@ -1,6 +1,5 @@
 import React from "react";
 import ProfileSidebar from "./profileSidebar";
-// import { Outlet, Route, Routes } from "react-router-dom";
 
 const ProfileSetting = () => {
   return (

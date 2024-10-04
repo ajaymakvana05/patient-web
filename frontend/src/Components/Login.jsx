@@ -1,11 +1,8 @@
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import RightSideContent from "./RightSideContent";
-<<<<<<< HEAD
-=======
 import { toast } from "react-toastify";
-import 'react-toastify/dist/ReactToastify.css';
->>>>>>> 2ba2bf4ca6e173af71fe88826d66b92e63590a46
+import "react-toastify/dist/ReactToastify.css";
 
 const Login = () => {
   const [formData, setFormData] = useState({
@@ -23,11 +20,9 @@ const Login = () => {
     setErrors((prevErrors) => ({ ...prevErrors, [id]: "" }));
   };
 
-<<<<<<< HEAD
+
   const emailPattern = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
 
-=======
->>>>>>> 2ba2bf4ca6e173af71fe88826d66b92e63590a46
   const handleSubmit = async (e) => {
     e.preventDefault();
     const newErrors = {};
@@ -54,28 +49,39 @@ const Login = () => {
           "Content-Type": "application/json",
         },
         body: JSON.stringify(formData),
-        credentials: 'include',
+        credentials: "include",
       });
 
       const result = await response.json();
 
       if (response.ok) {
-<<<<<<< HEAD
-        localStorage.setItem("token", result.token);
-        console.log("Login successful:", result);
-        navigate("/adminDashboard");
+        //   localStorage.setItem("token", result.token);
+        //   console.log("Login successful:", result);
+        //   navigate("/adminDashboard");
+        // } else {
+        //   setErrors({
+        //     apiError: result.message || "Login failed, please try again.",
+        //   });
+
+
+      //   localStorage.setItem("token", result.token);
+      //   console.log("Login successful:", result);
+      //   navigate("/adminDashboard");
+      // } else {
+      //   setErrors({
+      //     apiError: result.message || "Login failed, please try again.",
+      //   });
+
+
+        localStorage.setItem("token", result.Admintoken);
+        toast.success("Login successful! Redirecting...");
+        navigate("/profiledashboard");
       } else {
+        toast.error(result.message || "Login failed, please try again.");
         setErrors({
           apiError: result.message || "Login failed, please try again.",
         });
-=======
-        localStorage.setItem("token", result.Admintoken);
-        toast.success("Login successful! Redirecting...");
-        navigate("/adminDashboard");
-      } else {
-        toast.error(result.message || "Login failed, please try again.");
         setErrors({ apiError: result.message || "Login failed, please try again." });
->>>>>>> 2ba2bf4ca6e173af71fe88826d66b92e63590a46
       }
     } catch (error) {
       console.error("Network error:", error);
@@ -92,7 +98,9 @@ const Login = () => {
 
       <div className="md:order-1 order-2 flex justify-center items-center bg-gray-50 p-6 md:p-12">
         <div className="w-full max-w-md p-8 mx-auto bg-white border border-gray-200 rounded-lg shadow-lg">
-          <h2 className="text-2xl font-bold text-gray-800 mb-6 text-center">Login</h2>
+          <h2 className="text-2xl font-bold text-gray-800 mb-6 text-center">
+            Login
+          </h2>
           <form onSubmit={handleSubmit}>
             <div className="mb-4 relative">
               <input
@@ -101,8 +109,9 @@ const Login = () => {
                 placeholder=" "
                 value={formData.email}
                 onChange={handleChange}
-                className={`peer block px-2.5 pb-2.5 pt-4 w-full text-sm text-gray-900 bg-transparent border border-gray-300 rounded-lg focus:outline-none focus:border-blue-600 focus:ring-0 ${errors.email ? "border-red-500" : "border-gray-300"
-                  }`}
+                className={`peer block px-2.5 pb-2.5 pt-4 w-full text-sm text-gray-900 bg-transparent border border-gray-300 rounded-lg focus:outline-none focus:border-blue-600 focus:ring-0 ${
+                  errors.email ? "border-red-500" : "border-gray-300"
+                }`}
               />
               <label
                 htmlFor="email"
@@ -122,8 +131,9 @@ const Login = () => {
                 placeholder=" "
                 value={formData.password}
                 onChange={handleChange}
-                className={`peer block px-2.5 pb-2.5 pt-4 w-full text-sm text-gray-900 bg-transparent border border-gray-300 rounded-lg focus:outline-none focus:border-blue-600 focus:ring-0 ${errors.password ? "border-red-500" : "border-gray-300"
-                  }`}
+                className={`peer block px-2.5 pb-2.5 pt-4 w-full text-sm text-gray-900 bg-transparent border border-gray-300 rounded-lg focus:outline-none focus:border-blue-600 focus:ring-0 ${
+                  errors.password ? "border-red-500" : "border-gray-300"
+                }`}
               />
               <label
                 htmlFor="password"
@@ -144,7 +154,7 @@ const Login = () => {
 
             <button
               type="submit"
-              className="w-full bg-blue-500 text-white py-3 rounded-lg hover:bg-blue-600 transition-colors"
+              className="w-full bg-blue text-white py-3 rounded-lg hover:bg-blue-600 transition-colors"
             >
               Login
             </button>

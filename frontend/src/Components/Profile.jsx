@@ -1,27 +1,18 @@
 import React from "react";
 import Sidebar from "./Sidebar";
 import ProfileSidebar from "./profileSidebar";
+import { Link } from "react-router-dom";
 
 const Profile = () => {
   return (
     <div className="flex flex-col h-10">
-      <div
-        className=" p-8 h-[296px]"
-        style={{
-          background:
-            "linear-gradient(107.38deg, #4C49ED 2.61%, #020067 101.2%)",
-        }}
-      >
-        <h2 className="font-medium text-2xl text-white">Profile Setting</h2>
-      </div>
+     
       <div className="flex ">
-        <ProfileSidebar />
-
-        <div className="w-3/4 bg-white p-6 rounded-lg shadow-md">
+        <div className="  p-6 ">
           <div className="flex justify-between items-center mb-6">
             <h2 className="text-xl font-bold">Profile</h2>
             <button className="bg-blue text-white px-4 py-2 rounded-lg">
-              Edit Profile
+              <Link to="/profiledashboard/editprofileform">Edit Profile</Link>
             </button>
           </div>
           <form>
