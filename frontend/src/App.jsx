@@ -8,6 +8,7 @@ import AdminRegistration from "./pages/admin/adminRegistration";
 import ProfileDashboard from "./pages/admin/ProfileDashboard";
 import Profile from "./Components/Profile";
 import { ToastContainer } from "react-toastify";
+<<<<<<< HEAD
 import "react-toastify/dist/ReactToastify.css";
 import ChangePassword from "./Components/ChangePassword";
 import EditProfileForm from "./Components/EditProfileForm";
@@ -17,6 +18,10 @@ import DoctorDashboard from "./pages/admin/DoctorDashboard";
 import PatientDashboard from "./pages/admin/PatientDashboard";
 import BillingDashboard from "./pages/admin/BillingDashboard";
 import ReportingDashboard from "./pages/admin/ReportingDashboard";
+=======
+import 'react-toastify/dist/ReactToastify.css';
+import ChangePassword from "./Components/ChangePassword";
+>>>>>>> 062936cfc39a0ab0786387c2b041427f55dfecf5
 
 const App = () => {
   return (
@@ -38,6 +43,7 @@ const App = () => {
           <Route path="/forgetpassword" element={<ForgotPassword />} />
           <Route path="/getotp" element={<GetOTP />} />
           <Route path="/adminregistration" element={<AdminRegistration />} />
+          <Route path="/changepassword" element={<ChangePassword />} />
 
           <Route path="/profiledashboard" element={<ProfileDashboard />}>
             <Route index path="profile" element={<Profile />} />
