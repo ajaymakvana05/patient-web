@@ -1,8 +1,6 @@
 import React from "react";
 import Sidebar from "../../Components/Sidebar";
 import Header from "../../Components/Header";
-import ProfileForm from "../../Components/ProfileSetting";
-import ProfileSetting from "../../Components/ProfileSetting";
 import { Outlet, Route, Routes } from "react-router-dom";
 import Profile from "../../Components/Profile";
 

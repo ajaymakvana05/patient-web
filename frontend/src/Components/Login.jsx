@@ -1,11 +1,8 @@
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import RightSideContent from "./RightSideContent";
-<<<<<<< HEAD
-=======
 import { toast } from "react-toastify";
 import 'react-toastify/dist/ReactToastify.css';
->>>>>>> 2ba2bf4ca6e173af71fe88826d66b92e63590a46
 
 const Login = () => {
   const [formData, setFormData] = useState({
@@ -23,11 +20,9 @@ const Login = () => {
     setErrors((prevErrors) => ({ ...prevErrors, [id]: "" }));
   };
 
-<<<<<<< HEAD
+
   const emailPattern = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
 
-=======
->>>>>>> 2ba2bf4ca6e173af71fe88826d66b92e63590a46
   const handleSubmit = async (e) => {
     e.preventDefault();
     const newErrors = {};
@@ -60,22 +55,21 @@ const Login = () => {
       const result = await response.json();
 
       if (response.ok) {
-<<<<<<< HEAD
-        localStorage.setItem("token", result.token);
-        console.log("Login successful:", result);
-        navigate("/adminDashboard");
-      } else {
-        setErrors({
-          apiError: result.message || "Login failed, please try again.",
-        });
-=======
+
+      //   localStorage.setItem("token", result.token);
+      //   console.log("Login successful:", result);
+      //   navigate("/adminDashboard");
+      // } else {
+      //   setErrors({
+      //     apiError: result.message || "Login failed, please try again.",
+      //   });
+
         localStorage.setItem("token", result.Admintoken);
         toast.success("Login successful! Redirecting...");
-        navigate("/adminDashboard");
+        navigate("/profiledashboard");
       } else {
         toast.error(result.message || "Login failed, please try again.");
         setErrors({ apiError: result.message || "Login failed, please try again." });
->>>>>>> 2ba2bf4ca6e173af71fe88826d66b92e63590a46
       }
     } catch (error) {
       console.error("Network error:", error);

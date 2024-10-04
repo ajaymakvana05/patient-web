@@ -5,13 +5,11 @@ import Login from "./Components/Login";
 import ForgotPassword from "./Components/ForgotPassword";
 import GetOTP from "./Components/GetOTP";
 import AdminRegistration from "./pages/admin/adminRegistration";
-<<<<<<< HEAD
 import ProfileDashboard from "./pages/admin/ProfileDashboard";
 import Profile from "./Components/Profile";
-=======
 import { ToastContainer } from "react-toastify";
 import 'react-toastify/dist/ReactToastify.css';
->>>>>>> 2ba2bf4ca6e173af71fe88826d66b92e63590a46
+import ChangePassword from "./Components/ChangePassword";
 
 const App = () => {
   return (
@@ -33,6 +31,7 @@ const App = () => {
           <Route path="/forgetpassword" element={<ForgotPassword />} />
           <Route path="/getotp" element={<GetOTP />} />
           <Route path="/adminregistration" element={<AdminRegistration />} />
+          <Route path="/changepassword" element={<ChangePassword />} />
 
           <Route path="/profiledashboard" element={<ProfileDashboard />} />
 
