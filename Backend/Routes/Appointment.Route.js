@@ -12,7 +12,7 @@ AppointmentRoute.delete("/DeleteAppointment/:id",Auth,DeleteAppointment)
 AppointmentRoute.get("/PaAppointmentHistory/:PatientID",Auth,getPatientAppointmentHistory)
 
 // Fetch appointment history for a doctor
-AppointmentRoute.get("/DoAppointmentHistory/:DoctorID",DoctorAuth,getDoctorAppointmentHistory)
+AppointmentRoute.get("/AppointmentHistory/:DoctorID",DoctorAuth,getDoctorAppointmentHistory)
 AppointmentRoute.get("/UpcomingAppointment/:DoctorID",DoctorAuth,getDoctorUpcomingAppointments)
 
 // cancelcAppointment
