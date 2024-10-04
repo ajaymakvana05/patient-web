@@ -64,11 +64,41 @@
 
 .image-box img {
   width: 100%;
-  max-width: 380px;
+  max-width: 100%;
+  height: 100%;
+  object-fit: cover;
 }
 
 .top-right-image {
   position: absolute;
   right: 0;
   bottom: 0;
+}
+
+.image-box {
+  width: 100%;
+  height: 100vh;
+}
+.right-image {
+  width: 100%;
+  height: 100%;
+  position: relative;
+}
+.right-content-box {
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin: auto;
+  width: 100%;
+  height: 100%;
+}
+.logo {
+  width: 100%;
+  max-width: 200px;
+}
+.slide-image {
+  width: 100%;
+  max-width: 500px;
 }

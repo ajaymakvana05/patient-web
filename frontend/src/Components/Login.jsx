@@ -1,7 +1,6 @@
 import { useState } from "react";
-import { Link,useNavigate  } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import RightSideContent from "./RightSideContent";
-
 
 const Login = () => {
   const [formData, setFormData] = useState({
@@ -22,7 +21,7 @@ const Login = () => {
 
   const emailPattern = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
 
-  const handleSubmit = async(e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     const newErrors = {};
 
@@ -58,9 +57,11 @@ const Login = () => {
       if (response.ok) {
         localStorage.setItem("token", result.token);
         console.log("Login successful:", result);
-        navigate("/adminDashboard"); 
+        navigate("/adminDashboard");
       } else {
-        setErrors({ apiError: result.message || "Login failed, please try again." });
+        setErrors({
+          apiError: result.message || "Login failed, please try again.",
+        });
       }
     } catch (error) {
       console.error("Network error:", error);
@@ -70,7 +71,7 @@ const Login = () => {
 
   return (
     <div className="grid md:grid-cols-2 grid-cols-1 min-h-screen">
-      <div className="md:order-2 order-1 flex justify-center items-center bg-blue-50 p-6 md:p-12">
+      <div className="md:order-2 order-1 flex justify-center items-center bg-blue-50">
         <RightSideContent />
       </div>
 

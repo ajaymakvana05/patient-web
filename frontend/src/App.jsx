@@ -6,6 +6,8 @@ import Login from "./Components/Login";
 import ForgotPassword from "./Components/ForgotPassword";
 import GetOTP from "./Components/GetOTP";
 import AdminRegistration from "./pages/admin/adminRegistration";
+import ProfileDashboard from "./pages/admin/ProfileDashboard";
+import Profile from "./Components/Profile";
 
 const App = () => {
   return (
@@ -18,6 +20,10 @@ const App = () => {
           <Route path="/forgetpassword" element={<ForgotPassword />} />
           <Route path="/getotp" element={<GetOTP />} />
           <Route path="/adminregistration" element={<AdminRegistration />} />
+
+          <Route path="/profiledashboard" element={<ProfileDashboard />} />
+
+          <Route path="/profiledashboard/profile" element={<Profile />} />
         </Routes>
       </div>
     </Router>
