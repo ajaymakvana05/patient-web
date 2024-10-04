@@ -1,5 +1,7 @@
+const AppointmentModel = require("../Models/Appointment.Schema");
 const DoctorModel = require("../Models/Doctor.schema");
-const jwt = require("jsonwebtoken")
+const jwt = require("jsonwebtoken");
+const PatientModel = require("../Models/PatientSchema");
 
 const login = async (req, res) => {
     try {
@@ -83,4 +85,32 @@ const DoctorUpdate = async (req, res) => {
 
 }
 
-module.exports = { login ,resetpassword,DoctorProfile,DoctorUpdate}
+
+// patient record
+const PatientRecord = async (req, res) => {
+    try {
+  
+      const appointmentHistory = await AppointmentModel.find({ DoctorID:req.body.DoctorID })
+        .populate('PatientID', 'firstname lastname age gender') // Populates patient information
+        
+      res.status(200).json({ message: 'Doctor appointment history', data: appointmentHistory });
+    } catch (error) {
+      res.status(500).json({ message: error.message });
+    }
+  };
+
+  const SinglePatient=async(req,res)=>{
+    try {
+        let{PatientID}=req.params
+        const singlepatient=await AppointmentModel.findOne({PatientID})
+        .populate({ path: "PatientID" }) 
+        .populate({ path: "DoctorID", select: "DoctorName" });
+        res.json(singlepatient)
+    } catch (error) {
+        console.log(error);
+        
+        res.status(500).json({ message: error.message });
+    }
+  }
+
+module.exports = { login ,resetpassword,DoctorProfile,DoctorUpdate,PatientRecord,SinglePatient}
