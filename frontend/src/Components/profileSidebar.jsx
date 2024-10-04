@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 
 const ProfileSidebar = () => {
   return (
-    <div className="w-full max-w-[300px] bg-white p-6 shadow-md rounded-lg">
+    <div className="w-full max-w-[300px] bg-white p-6 ">
       <div className="flex flex-col items-center">
         <img
           src="https://via.placeholder.com/100"

@@ -12,7 +12,7 @@ const ProfileDashboard = () => {
         <Header />
         <div className="flex flex-col h-full">
           <div
-            className=" p-8 h-[296px]"
+            className=" p-8 h-[250px]"
             style={{
               background:
                 "linear-gradient(107.38deg, #4C49ED 2.61%, #020067 101.2%)",

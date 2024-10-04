@@ -99,16 +99,6 @@ const PrivacyPolicy = () => {
             </p>
           </section>
         </div>
-
-        {/* Footer Buttons */}
-        <div className="flex justify-end mt-4 space-x-4">
-          <button className="px-6 py-2 bg-gray-300 text-gray-700 rounded-md hover:bg-gray-400 transition duration-200">
-            Decline
-          </button>
-          <button className="px-6 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 transition duration-200">
-            Accept
-          </button>
-        </div>
       </div>
     </div>
   );

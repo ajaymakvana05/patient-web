@@ -10,6 +10,7 @@ export default {
         blue: "#605BFF",
         liteBlue: "#718EBF",
         greyBlue: "#818194",
+        liteRed: "#E11D29",
 
         // Grey colors
         greyDark: "#4F4F4F",

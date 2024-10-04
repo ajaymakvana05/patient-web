@@ -104,65 +104,66 @@ const Register = () => {
   };
 
   return (
-    <div className="flex items-center justify-center min-h-screen bg-gray-100">
-      <div className="w-full max-w-lg bg-white p-8 rounded-lg shadow-lg">
-        <h2 className="text-3xl  mb-6 text-center">Registration</h2>
+    <div className="grid md:grid-cols-2 grid-cols-1 min-h-screen">
+      <div className="bg-white m-auto p-6 sm:p-8 rounded-lg shadow-lg w-full md:w-[90%] lg:w-[70%]">
+        <h2 className="text-3xl mb-6 text-center">Registration</h2>
         <form onSubmit={handleSubmit} noValidate>
-          <div className="grid grid-cols-2 gap-4">
-            <div className="relative ">
+          <div className="grid md:grid-cols-2 grid-cols-1 gap-4">
+            <div className="relative">
               <input
                 type="text"
                 name="firstName"
                 value={formData.firstName}
                 onChange={handleChange}
-                className={` block px-[8px] py-2 w-full text-sm  placeholder-grey bg-transparent border ${
+                className={`block px-4 py-2 w-full text-sm placeholder-gray-500 bg-transparent border ${
                   errors.firstName ? "border-red-500" : "border-gray-300"
-                } rounded-lg appearance-none focus:outline-none focus:ring-0 focus:border-blue-600 peer peer`}
+                } rounded-lg appearance-none focus:outline-none focus:ring-0 focus:border-blue-600`}
                 placeholder="Enter First Name"
               />
-              <label className=" font-medium -translate-y-4 absolute bg-white cursor-text duration-300  left-1 origin-[0] px-4 scale-75 select-none text-black text-sm top-2 transform z-10">
+              <label className="font-medium -translate-y-4 absolute bg-white cursor-text duration-300 left-4 origin-[0] scale-75 text-black text-sm top-2 transform z-10">
                 Firstname*
               </label>
               {errors.firstName && (
-                <p className="text-red text-sm">{errors.firstName}</p>
+                <p className="text-red-500 text-sm">{errors.firstName}</p>
               )}
             </div>
-            <div className="relative ">
+            <div className="relative">
               <input
                 type="text"
                 name="lastName"
                 value={formData.lastName}
                 onChange={handleChange}
-                className={`block  px-[8px] py-2 w-full text-sm text-gray-900 bg-transparent border ${
+                className={`block px-4 py-2 w-full text-sm placeholder-gray-500 bg-transparent border ${
                   errors.lastName ? "border-red-500" : "border-gray-300"
-                } rounded-lg appearance-none focus:outline-none focus:ring-0 focus:border-blue-600 peer`}
+                } rounded-lg appearance-none focus:outline-none focus:ring-0 focus:border-blue-600`}
                 placeholder="Enter Last Name"
               />
-              <label className="font-medium -translate-y-4 absolute bg-white cursor-text duration-300  left-1 origin-[0] px-4 scale-75 select-none text-black text-sm top-2 transform z-10">
+              <label className="font-medium -translate-y-4 absolute bg-white cursor-text duration-300 left-4 origin-[0] scale-75 text-black text-sm top-2 transform z-10">
                 Lastname*
               </label>
               {errors.lastName && (
-                <p className="text-red text-sm">{errors.lastName}</p>
+                <p className="text-red-500 text-sm">{errors.lastName}</p>
               )}
             </div>
           </div>
-          <div className="grid grid-cols-2 gap-4">
+
+          <div className="grid md:grid-cols-2 grid-cols-1 gap-4">
             <div className="relative mt-4">
               <input
                 type="email"
                 name="email"
                 value={formData.email}
                 onChange={handleChange}
-                className={`block px-4 py-2 w-full text-sm text-gray-900 bg-transparent border ${
+                className={`block px-4 py-2 w-full text-sm placeholder-gray-500 bg-transparent border ${
                   errors.email ? "border-red-500" : "border-gray-300"
-                } rounded-lg appearance-none focus:outline-none focus:ring-0 focus:border-blue-600 peer`}
+                } rounded-lg appearance-none focus:outline-none focus:ring-0 focus:border-blue-600`}
                 placeholder="Enter Email"
               />
-              <label className="font-medium -translate-y-4 absolute bg-white cursor-text duration-300  left-1 origin-[0] px-4 scale-75 select-none text-black text-sm top-2 transform z-10">
+              <label className="font-medium -translate-y-4 absolute bg-white cursor-text duration-300 left-4 origin-[0] scale-75 text-black text-sm top-2 transform z-10">
                 Email*
               </label>
               {errors.email && (
-                <p className="text-red text-sm">{errors.email}</p>
+                <p className="text-red-500 text-sm">{errors.email}</p>
               )}
             </div>
             <div className="relative mt-4">
@@ -171,31 +172,31 @@ const Register = () => {
                 name="phone"
                 value={formData.phone}
                 onChange={handleChange}
-                className={`block px-6 py-2 w-full text-sm text-gray-900 bg-transparent border ${
+                className={`block px-4 py-2 w-full text-sm placeholder-gray-500 bg-transparent border ${
                   errors.phone ? "border-red-500" : "border-gray-300"
-                } rounded-lg appearance-none focus:outline-none focus:ring-0 focus:border-blue-600 peer`}
-                placeholder=" Phone "
+                } rounded-lg appearance-none focus:outline-none focus:ring-0 focus:border-blue-600`}
+                placeholder="Phone"
               />
-              <label className="font-medium -translate-y-4 absolute bg-white cursor-text duration-300  left-1 origin-[0] px-4 scale-75 select-none text-black text-sm top-2 transform z-10">
+              <label className="font-medium -translate-y-4 absolute bg-white cursor-text duration-300 left-4 origin-[0] scale-75 text-black text-sm top-2 transform z-10">
                 Phone*
               </label>
               {errors.phone && (
-                <p className="text-red text-sm">{errors.phone}</p>
+                <p className="text-red-500 text-sm">{errors.phone}</p>
               )}
             </div>
           </div>
 
-          <div className="grid grid-cols-3 gap-4 mt-4">
+          <div className="grid md:grid-cols-3 grid-cols-1 gap-4 mt-4">
             <div className="relative">
               <select
                 name="country"
                 value={formData.country}
                 onChange={handleChange}
-                className={`block px-4 py-2 w-full text-sm text-gray-900 bg-transparent border ${
+                className={`block px-4 py-2 w-full text-sm bg-transparent border ${
                   errors.country ? "border-red-500" : "border-gray-300"
-                } rounded-lg appearance-none focus:outline-none focus:ring-0 focus:border-blue-600 peer`}
+                } rounded-lg appearance-none focus:outline-none focus:ring-0 focus:border-blue-600`}
               >
-                <option value="" className="" disabled selected>
+                <option value="" disabled>
                   Select Country
                 </option>
                 <option value="United States">United States</option>
@@ -204,24 +205,21 @@ const Register = () => {
                 <option value="Australia">Australia</option>
                 <option value="India">India</option>
               </select>
-              <label
-                className={`absolute top-2 left-2 z-10 origin-[0] -translate-y-4 scale-75 transform cursor-text select-none bg-white px-2 text-sm duration-300 peer-placeholder-shown:top-2 peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-0 peer-focus:top-2 peer-focus:-translate-y-4 peer-focus:scale-75 peer-focus:px-2 peer-focus:text-blue-600`}
-              >
+              <label className="font-medium -translate-y-4 absolute bg-white cursor-text duration-300 left-4 origin-[0] scale-75 text-black text-sm top-2 transform z-10">
                 Country*
               </label>
               {errors.country && (
-                <p className="text-red text-sm">{errors.country}</p>
+                <p className="text-red-500 text-sm">{errors.country}</p>
               )}
             </div>
-
             <div className="relative">
               <select
                 name="state"
                 value={formData.state}
                 onChange={handleChange}
-                className={`block px-4 py-2 w-full text-sm text-gray-900 bg-transparent border ${
+                className={`block px-4 py-2 w-full text-sm bg-transparent border ${
                   errors.state ? "border-red-500" : "border-gray-300"
-                } rounded-lg appearance-none focus:outline-none focus:ring-0 focus:border-blue-600 peer`}
+                } rounded-lg appearance-none focus:outline-none focus:ring-0 focus:border-blue-600`}
               >
                 <option value="" disabled>
                   Select State
@@ -230,113 +228,101 @@ const Register = () => {
                 <option value="Texas">Texas</option>
                 <option value="New York">New York</option>
                 <option value="Florida">Florida</option>
-                <option value="Illinois">Illinois</option>
+                <option value="Ohio">Ohio</option>
               </select>
-              <label
-                className={`absolute top-2 left-2 z-10 origin-[0] -translate-y-4 scale-75 transform cursor-text select-none bg-white px-2 text-sm duration-300 peer-placeholder-shown:top-2 peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-0 peer-focus:top-2 peer-focus:-translate-y-4 peer-focus:scale-75 peer-focus:px-2 peer-focus:text-blue-600`}
-              >
+              <label className="font-medium -translate-y-4 absolute bg-white cursor-text duration-300 left-4 origin-[0] scale-75 text-black text-sm top-2 transform z-10">
                 State*
               </label>
               {errors.state && (
-                <p className="text-red text-sm">{errors.state}</p>
+                <p className="text-red-500 text-sm">{errors.state}</p>
               )}
             </div>
-
             <div className="relative">
               <select
                 name="city"
                 value={formData.city}
                 onChange={handleChange}
-                className={`block px-4 py-2 w-full text-sm text-gray-900 bg-transparent border ${
+                className={`block px-4 py-2 w-full text-sm bg-transparent border ${
                   errors.city ? "border-red-500" : "border-gray-300"
-                } rounded-lg appearance-none focus:outline-none focus:ring-0 focus:border-blue-600 peer`}
+                } rounded-lg appearance-none focus:outline-none focus:ring-0 focus:border-blue-600`}
               >
                 <option value="" disabled>
                   Select City
                 </option>
-                <option value="New York">New York</option>
                 <option value="Los Angeles">Los Angeles</option>
-                <option value="Chicago">Chicago</option>
                 <option value="Houston">Houston</option>
-                <option value="Phoenix">Phoenix</option>
+                <option value="New York City">New York City</option>
+                <option value="Miami">Miami</option>
+                <option value="Columbus">Columbus</option>
               </select>
-              <label
-                className={`absolute top-2 left-2 z-10 origin-[0] -translate-y-4 scale-75 transform cursor-text select-none bg-white px-2 text-sm duration-300 peer-placeholder-shown:top-2 peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-0 peer-focus:top-2 peer-focus:-translate-y-4 peer-focus:scale-75 peer-focus:px-2 peer-focus:text-blue-600`}
-              >
+              <label className="font-medium -translate-y-4 absolute bg-white cursor-text duration-300 left-4 origin-[0] scale-75 text-black text-sm top-2 transform z-10">
                 City*
               </label>
-              {errors.city && <p className="text-red text-sm">{errors.city}</p>}
+              {errors.city && (
+                <p className="text-red-500 text-sm">{errors.city}</p>
+              )}
             </div>
           </div>
 
           <div className="relative mt-4">
-            <select
+            <input
+              type="text"
               name="hospital"
               value={formData.hospital}
               onChange={handleChange}
-              className={`block px-4 py-2 w-full text-sm text-gray-900 bg-transparent border ${
+              className={`block px-4 py-2 w-full text-sm placeholder-gray-500 bg-transparent border ${
                 errors.hospital ? "border-red-500" : "border-gray-300"
-              } rounded-lg appearance-none focus:outline-none focus:ring-0 focus:border-blue-600 peer`}
-            >
-              <option value="" disabled>
-                Select Hospital
-              </option>
-              <option value="General Hospital">General Hospital</option>
-              <option value="City Hospital">City Hospital</option>
-              <option value="Community Health Center">
-                Community Health Center
-              </option>
-              <option value="Central Clinic">Central Clinic</option>
-              <option value="Northside Hospital">Northside Hospital</option>
-            </select>
-            <label
-              className={`text-black  absolute top-2 left-1 z-10 origin-[0] -translate-y-4 scale-75 transform cursor-text select-none bg-white px-2 text-sm duration-300 peer-placeholder-shown:top-1/2 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:scale-100 peer-focus:top-2 peer-focus:-translate-y-4 peer-focus:scale-75 peer-focus:px-2 peer-focus:text-blue-600`}
-            >
-              Select Hospital
+              } rounded-lg appearance-none focus:outline-none focus:ring-0 focus:border-blue-600`}
+              placeholder="Enter Hospital Name"
+            />
+            <label className="font-medium -translate-y-4 absolute bg-white cursor-text duration-300 left-4 origin-[0] scale-75 text-black text-sm top-2 transform z-10">
+              Hospital*
             </label>
             {errors.hospital && (
-              <p className="text-red text-sm">{errors.hospital}</p>
+              <p className="text-red-500 text-sm">{errors.hospital}</p>
             )}
           </div>
 
-          <div className="relative mt-4">
-            <input
-              type="password"
-              name="password"
-              value={formData.password}
-              onChange={handleChange}
-              className={`block px-4 py-2 w-full text-sm text-gray-900 bg-transparent border ${
-                errors.password ? "border-red-500" : "border-gray-300"
-              } rounded-lg appearance-none focus:outline-none focus:ring-0 focus:border-blue-600 peer`}
-              placeholder="Enter Password"
-            />
-            <label className="font-medium font-medium -translate-y-4 absolute bg-white cursor-text duration-300  left-1 origin-[0] px-4 scale-75 select-none text-black text-sm top-2 transform z-10">
-              Password
-            </label>
-            {errors.password && (
-              <p className="text-red text-sm">{errors.password}</p>
-            )}
-          </div>
-          <div className="relative mt-4">
-            <input
-              type="password"
-              name="confirmPassword"
-              value={formData.confirmPassword}
-              onChange={handleChange}
-              className={`block px-4 py-2 w-full text-sm text-gray-900 bg-transparent border ${
-                errors.confirmPassword ? "border-red-500" : "border-gray-300"
-              } rounded-lg appearance-none focus:outline-none focus:ring-0 focus:border-blue-600 peer`}
-              placeholder="Confirm Password"
-            />
-            <label className="font-medium -translate-y-4 absolute bg-white cursor-text duration-300  left-1 origin-[0] px-4 scale-75 select-none text-black text-sm top-2 transform z-10">
-              Confirm Passowrd
-            </label>
-            {errors.confirmPassword && (
-              <p className="text-red text-sm">{errors.confirmPassword}</p>
-            )}
+          <div className="grid md:grid-cols-2 grid-cols-1 gap-4 mt-4">
+            <div className="relative">
+              <input
+                type="password"
+                name="password"
+                value={formData.password}
+                onChange={handleChange}
+                className={`block px-4 py-2 w-full text-sm placeholder-gray-500 bg-transparent border ${
+                  errors.password ? "border-red-500" : "border-gray-300"
+                } rounded-lg appearance-none focus:outline-none focus:ring-0 focus:border-blue-600`}
+                placeholder="Enter Password"
+              />
+              <label className="font-medium -translate-y-4 absolute bg-white cursor-text duration-300 left-4 origin-[0] scale-75 text-black text-sm top-2 transform z-10">
+                Password*
+              </label>
+              {errors.password && (
+                <p className="text-red-500 text-sm">{errors.password}</p>
+              )}
+            </div>
+            <div className="relative">
+              <input
+                type="password"
+                name="confirmPassword"
+                value={formData.confirmPassword}
+                onChange={handleChange}
+                className={`block px-4 py-2 w-full text-sm placeholder-gray-500 bg-transparent border ${
+                  errors.confirmPassword ? "border-red-500" : "border-gray-300"
+                } rounded-lg appearance-none focus:outline-none focus:ring-0 focus:border-blue-600`}
+                placeholder="Confirm Password"
+              />
+              <label className="font-medium -translate-y-4 absolute bg-white cursor-text duration-300 left-4 origin-[0] scale-75 text-black text-sm top-2 transform z-10">
+                Confirm Password*
+              </label>
+              {errors.confirmPassword && (
+                <p className="text-red-500 text-sm">{errors.confirmPassword}</p>
+              )}
+            </div>
           </div>
 
-          <div className="mt-4 flex items-center">
+          <div className="flex items-center mt-4">
             <input
               type="checkbox"
               name="terms"
@@ -344,32 +330,30 @@ const Register = () => {
               onChange={handleChange}
               className="mr-2"
             />
-            <label className="text-sm text-gray-600">
-              I accept the terms and conditions
+            <label className="text-sm">
+              I accept the{" "}
+              <Link to="/terms" className="text-blue-600 hover:underline">
+                Terms and Conditions
+              </Link>
+              *
             </label>
           </div>
-          {errors.terms && <p className="text-red text-sm">{errors.terms}</p>}
-
+          {errors.terms && (
+            <p className="text-red-500 text-sm">{errors.terms}</p>
+          )}
+          {errors.apiError && (
+            <p className="text-red-500 text-sm">{errors.apiError}</p>
+          )}
           <button
             type="submit"
-            className="mt-6 w-full bg-greyLightest text-black py-2 rounded-lg hover:bg-blue-700 transition duration-200"
+            className="w-full mt-4 bg-blue-600 text-white py-2 rounded-lg hover:bg-blue-500 transition duration-200"
           >
             Register
           </button>
-
-          {errors.apiError && (
-            <p className="mt-4 text-red-500 text-sm text-center">
-              {errors.apiError}
-            </p>
-          )}
-
-          <p className="mt-4 text-center text-sm text-gray-500">
+          <p className="mt-4 text-sm text-center">
             Already have an account?{" "}
-            <Link
-              to="/login"
-              className="font-semibold leading-6 text-indigo-600 hover:text-indigo-500"
-            >
-              Login
+            <Link to="/login" className="text-blue-600 hover:underline">
+              Login here
             </Link>
           </p>
         </form>

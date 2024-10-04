@@ -17,7 +17,7 @@ import DoctorDashboard from "./pages/admin/DoctorDashboard";
 import PatientDashboard from "./pages/admin/PatientDashboard";
 import BillingDashboard from "./pages/admin/BillingDashboard";
 import ReportingDashboard from "./pages/admin/ReportingDashboard";
-import 'react-toastify/dist/ReactToastify.css';
+import "react-toastify/dist/ReactToastify.css";
 // import ChangePassword from "./Components/ChangePassword";
 
 const App = () => {

@@ -2,17 +2,20 @@ import React from "react";
 import Sidebar from "./Sidebar";
 import ProfileSidebar from "./profileSidebar";
 import { Link } from "react-router-dom";
+import Edit from "../assets/images/edit.svg";
 
 const Profile = () => {
   return (
     <div className="flex flex-col h-10">
-     
       <div className="flex ">
         <div className="  p-6 ">
-          <div className="flex justify-between items-center mb-6">
+          <div className="flex justify-between  mb-6">
             <h2 className="text-xl font-bold">Profile</h2>
-            <button className="bg-blue text-white px-4 py-2 rounded-lg">
-              <Link to="/profiledashboard/editprofileform">Edit Profile</Link>
+            <button className="bg-blue text-white px-4 py-2 rounded-lg ">
+              <Link to="/profiledashboard/editprofileform" className="flex">
+                <img src={Edit} alt="" />
+                Edit Profile
+              </Link>
             </button>
           </div>
           <form>
@@ -26,7 +29,8 @@ const Profile = () => {
                 />
                 <label
                   htmlFor="first-name"
-                  className="absolute left-3 top-2.5 text-gray-700 transition-all duration-200 transform scale-100 peer-placeholder-shown:top-2.5 peer-placeholder-shown:left-3 peer-placeholder-shown:scale-100 peer-focus:-top-3 peer-focus:left-2.5 peer-focus:scale-75"
+                  style={{ fontWeight: "700" }}
+                  className="absolute left-3 top-2.5 text-gray transition-all duration-200 transform scale-100 peer-placeholder-shown:top-2.5 peer-placeholder-shown:left-3 peer-placeholder-shown:scale-100 peer-focus:-top-3 peer-focus:left-2.5 peer-focus:scale-75"
                 >
                   First Name
                 </label>
@@ -34,13 +38,14 @@ const Profile = () => {
 
               <div className="relative">
                 <input
-                  className="peer w-full border rounded-lg px-4 py-2 focus:outline-none"
+                  className="peer fs-[16px] w-full border rounded-lg px-4 py-2 focus:outline-none"
                   type="text"
                   id="last-name"
                   required
                 />
                 <label
                   htmlFor="last-name"
+                  style={{ fontWeight: "700" }}
                   className="absolute left-3 top-2.5 text-gray-700 transition-all duration-200 transform scale-100 peer-placeholder-shown:top-2.5 peer-placeholder-shown:left-3 peer-placeholder-shown:scale-100 peer-focus:-top-3 peer-focus:left-2.5 peer-focus:scale-75"
                 >
                   Last Name
@@ -56,6 +61,7 @@ const Profile = () => {
                 />
                 <label
                   htmlFor="email"
+                  style={{ fontWeight: "700" }}
                   className="absolute left-3 top-2.5 text-gray-700 transition-all duration-200 transform scale-100 peer-placeholder-shown:top-2.5 peer-placeholder-shown:left-3 peer-placeholder-shown:scale-100 peer-focus:-top-3 peer-focus:left-2.5 peer-focus:scale-75"
                 >
                   Email Address
@@ -71,6 +77,7 @@ const Profile = () => {
                 />
                 <label
                   htmlFor="phone"
+                  style={{ fontWeight: "700" }}
                   className="absolute left-3 top-2.5 text-gray-700 transition-all duration-200 transform scale-100 peer-placeholder-shown:top-2.5 peer-placeholder-shown:left-3 peer-placeholder-shown:scale-100 peer-focus:-top-3 peer-focus:left-2.5 peer-focus:scale-75"
                 >
                   Phone Number
@@ -86,6 +93,7 @@ const Profile = () => {
                 />
                 <label
                   htmlFor="hospital-name"
+                  style={{ fontWeight: "700" }}
                   className="absolute left-3 top-2.5 text-gray-700 transition-all duration-200 transform scale-100 peer-placeholder-shown:top-2.5 peer-placeholder-shown:left-3 peer-placeholder-shown:scale-100 peer-focus:-top-3 peer-focus:left-2.5 peer-focus:scale-75"
                 >
                   Hospital Name
@@ -101,6 +109,7 @@ const Profile = () => {
                 />
                 <label
                   htmlFor="gender"
+                  style={{ fontWeight: "700" }}
                   className="absolute left-3 top-2.5 text-gray-700 transition-all duration-200 transform scale-100 peer-placeholder-shown:top-2.5 peer-placeholder-shown:left-3 peer-placeholder-shown:scale-100 peer-focus:-top-3 peer-focus:left-2.5 peer-focus:scale-75"
                 >
                   Gender
@@ -116,6 +125,7 @@ const Profile = () => {
                 />
                 <label
                   htmlFor="city"
+                  style={{ fontWeight: "700" }}
                   className="absolute left-3 top-2.5 text-gray-700 transition-all duration-200 transform scale-100 peer-placeholder-shown:top-2.5 peer-placeholder-shown:left-3 peer-placeholder-shown:scale-100 peer-focus:-top-3 peer-focus:left-2.5 peer-focus:scale-75"
                 >
                   City
@@ -131,6 +141,7 @@ const Profile = () => {
                 />
                 <label
                   htmlFor="state"
+                  style={{ fontWeight: "700" }}
                   className="absolute left-3 top-2.5 text-gray-700 transition-all duration-200 transform scale-100 peer-placeholder-shown:top-2.5 peer-placeholder-shown:left-3 peer-placeholder-shown:scale-100 peer-focus:-top-3 peer-focus:left-2.5 peer-focus:scale-75"
                 >
                   State
@@ -146,6 +157,7 @@ const Profile = () => {
                 />
                 <label
                   htmlFor="country"
+                  style={{ fontWeight: "700" }}
                   className="absolute left-3 top-2.5 text-gray-700 transition-all duration-200 transform scale-100 peer-placeholder-shown:top-2.5 peer-placeholder-shown:left-3 peer-placeholder-shown:scale-100 peer-focus:-top-3 peer-focus:left-2.5 peer-focus:scale-75"
                 >
                   Country
