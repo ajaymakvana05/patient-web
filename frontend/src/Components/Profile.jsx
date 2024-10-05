@@ -26,7 +26,7 @@ const Profile = () => {
   useEffect(() => {
     const fetchAdminData = async () => {
       try {
-        const response = await fetch("https://patient-web.onrender.com/admin/profile", {
+        const response = await fetch("https://patient-web-1.onrender.com/admin/profile", {
           method: "GET",
           credentials: "include",
         });

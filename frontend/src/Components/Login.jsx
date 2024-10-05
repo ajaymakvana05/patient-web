@@ -43,7 +43,7 @@ const Login = () => {
     }
 
     try {
-      const response = await fetch("https://patient-web.onrender.com/admin/login", {
+      const response = await fetch("https://patient-web-1.onrender.com/admin/login", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

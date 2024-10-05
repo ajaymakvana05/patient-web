@@ -18,7 +18,7 @@ app.use(express.json())
 // const __dirname = path.resolve();
 
 app.use(cors({
-  origin: "https://patient-web.onrender.com", 
+  origin: "https://patient-web-1.onrender.com", 
   credentials: true,
 }));
 app.use(cookie())
