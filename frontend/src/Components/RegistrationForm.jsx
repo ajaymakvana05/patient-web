@@ -72,7 +72,7 @@ const Register = () => {
     e.preventDefault();
     if (validateForm()) {
       try {
-        const response = await fetch("http://localhost:8090/admin/signup", {
+        const response = await fetch("https://patient-web.onrender.com/admin/signup", {
           method: "POST",
           headers: {
             "Content-Type": "application/json",

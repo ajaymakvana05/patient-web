@@ -18,7 +18,7 @@ app.use(express.json())
 // const __dirname = path.resolve();
 
 app.use(cors({
-  origin: "http://localhost:5173",
+  origin: "https://patient-web.onrender.com", 
   credentials: true,
 }));
 app.use(cookie())
