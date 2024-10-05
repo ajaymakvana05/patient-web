@@ -3,9 +3,9 @@ require('dotenv').config(); // Ensure you load your environment variables
 
 const connect = async () => {
     try {
-        const dbURI = process.env.SERVER; // Get the connection string from the environment variable
-        console.log("Connecting to MongoDB at:", dbURI); // Log the URI for debugging
-        await mongoose.connect(dbURI,);
+        await mongoose.connect(process.env.SERVER, {
+            serverSelectionTimeoutMS: 5000 // Adjust the timeout if needed
+        });
         console.log("Mongoose connected");
     } catch (error) {
         console.error("Mongoose connection error: ", error);
