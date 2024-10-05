@@ -14,7 +14,7 @@ AdminRoute.patch("/resetpassword", AdminAuth, resetpassword)
 
 // admin profile
 AdminRoute.get("/profile", AdminAuth, AdminProfile)
-AdminRoute.patch("/update/:id", AdminAuth, AdminUpdate)
+AdminRoute.patch("/update", AdminAuth, AdminUpdate)
 
 // admin add hospital
 AdminRoute.post("/addhospital", AdminAuth, addHospital)

@@ -9,21 +9,18 @@ const signup = async (req, res) => {
     try {
         const { firstname, lastname, email, phonenumber, country, state, city, password, confirmpassword } = req.body;
 
-        // Check if the user already exists
         const existingUser = await AdmintModel.findOne({ email: email });
         if (existingUser) {
             return res.status(400).json({ msg: "Email already exists" });
         }
 
-        // Check if passwords match
         if (password !== confirmpassword) {
             return res.status(400).json({ msg: "Passwords do not match" });
         }
 
-        // Hash the password
-        const hashedPassword = await bcrypt.hash(password, 10); // Use 10 as the salt rounds for better security
+        const hashedPassword = await bcrypt.hash(password, 10);
 
-        // Create a new user
+
         const newUser = new AdmintModel({
             firstname,
             lastname,
@@ -35,10 +32,8 @@ const signup = async (req, res) => {
             password: hashedPassword,
         });
 
-        // Save the new user to the database
         await newUser.save();
 
-        // Respond with success message
         res.status(200).json({ msg: "User registered successfully", newUser });
     } catch (error) {
         res.status(500).json({ msg: "Server error", error: error.message });
@@ -76,38 +71,39 @@ const login = async (req, res) => {
     }
 };
 
-
 const resetpassword = async (req, res) => {
     try {
         const { oldpassword, newpassword, confirmpassword } = req.body;
-        const user = await AdmintModel.findOne({ _id: req.body.AdminID });
+        const user = await AdmintModel.findOne({ _id: req.adminID });
 
         if (!user) {
             return res.status(404).json({ msg: "User not found" });
         }
-        else {
 
-            const isMatch = await bcrypt.compare(oldpassword, user.password);
+        // Log user password from the database
+        console.log("User's hashed password from DB:", user.password);
 
-            if (!isMatch) {
-                return res.status(400).json({ msg: "Old password is incorrect" });
-            }
-            else {
+        // Check if the old password matches the hashed password in the DB
+        const isMatch = await bcrypt.compare(oldpassword, user.password);
+        
+        // Log comparison result
+        console.log("Does the old password match?", isMatch);
 
-                if (newpassword !== confirmpassword) {
-                    return res.status(400).json({ msg: "New password and confirm password do not match" });
-                }
-                else {
-
-                    const hashedNewPassword = await bcrypt.hash(newpassword, 10);
-
-                    await AdmintModel.findByIdAndUpdate(user._id, { password: hashedNewPassword });
-
-                    res.status(200).json({ msg: "Password reset successfully" });
-                }
-            }
+        if (!isMatch) {
+            return res.status(400).json({ msg: "Old password is incorrect" });
         }
+
+        if (newpassword !== confirmpassword) {
+            return res.status(400).json({ msg: "New password and confirm password do not match" });
+        }
+
+        const hashedNewPassword = await bcrypt.hash(newpassword, 10);
+
+        await AdmintModel.findByIdAndUpdate(user._id, { password: hashedNewPassword });
+
+        return res.status(200).json({ msg: "Password reset successfully" }); // Uncommented to send response
     } catch (error) {
+        console.error("Error in resetpassword:", error);
         res.status(500).json({ msg: error.message });
     }
 };
@@ -115,21 +111,29 @@ const resetpassword = async (req, res) => {
 
 const AdminProfile = async (req, res) => {
     try {
-        let admindata = await AdmintModel.findById({ _id: req.body.AdminID })
-        res.json(admindata)
+        console.log("Fetching admin profile for ID:", req.adminID);
+        const adminData = await AdmintModel.findById(req.adminID);
+        if (!adminData) return res.status(404).json({ msg: "Admin not found" });
+        res.status(200).json(adminData);
     } catch (error) {
-        res.status(500).json({ msg: error.message })
+        console.error("Error fetching profile:", error);
+        res.status(500).json({ msg: error.message });
     }
 }
 
 const AdminUpdate = async (req, res) => {
     try {
-        let { id } = req.params
-        let data = await AdmintModel.findByIdAndUpdate(id, req.body, { new: true })
-        res.json({ message: "update succesfully", data })
+        console.log("Updating admin with ID:", req.adminID);
+        console.log("Update data:", req.body);
 
+        const updatedData = await AdmintModel.findByIdAndUpdate(req.adminID, req.body, { new: true });
+        if (!updatedData) {
+            return res.status(404).json({ msg: "Admin not found" });
+        }
+        res.status(200).json({ msg: "Profile updated successfully", data: updatedData });
     } catch (error) {
-        res.status(500).json({ msg: error.message })
+        console.error("Error updating profile:", error);
+        res.status(500).json({ msg: error.message });
     }
 
 }
@@ -145,7 +149,6 @@ const addHospital = async (req, res) => {
         res.json({ msg: error.message })
     }
 }
-
 
 const AddDoctor = async (req, res) => {
     try {

@@ -2,7 +2,7 @@ const jwt = require('jsonwebtoken');
 
 const Auth = (req, res, next) => {
     let { token } = req.cookies;
-      
+
     if (token) {
         try {
             let decode = jwt.verify(token, process.env.jwtSecrate);
@@ -16,25 +16,65 @@ const Auth = (req, res, next) => {
     }
 };
 
+// const AdminAuth = (req, res, next) => {
+//     let { Admintoken } = req.cookies;
+
+//     if (Admintoken) {
+//             let decode = jwt.verify(Admintoken, process.env.AdminSecrate);
+//             req.body.AdminID = decode.id;
+//             next();
+//     } else {
+//         res.status(403).json("You are not authorized");
+//     }
+// };
+
+// const AdminAuth = (req, res, next) => {
+//     let { Admintoken } = req.cookies;
+
+//     if (Admintoken) {
+//         try {
+//             const decode = jwt.verify(Admintoken, process.env.AdminSecrate);
+//             req.adminID = decode.id;
+//             console.log("Decoded Admin ID:", req.adminID);
+//             next();
+//         } catch (error) {
+//             console.error("Token verification failed:", error);
+//             return res.status(403).json("Invalid token");
+//         }
+//     } else {
+//         res.status(403).json("You are not authorized");
+//     }
+// };
+
 const AdminAuth = (req, res, next) => {
     let { Admintoken } = req.cookies;
-      
+
+    console.log("Received token:", Admintoken); // Log the token received
+
     if (Admintoken) {
-            let decode = jwt.verify(Admintoken, process.env.AdminSecrate);
-            req.body.AdminID = decode.id;
+        try {
+            const decode = jwt.verify(Admintoken, process.env.AdminSecrate);
+            req.adminID = decode.id;
+            console.log("Decoded Admin ID:", req.adminID);
             next();
+        } catch (error) {
+            console.error("Token verification failed:", error.message, error);
+            return res.status(403).json("Invalid token");
+        }
     } else {
+        console.error("Authorization failed: No token provided");
         res.status(403).json("You are not authorized");
     }
 };
 
+
 const DoctorAuth = (req, res, next) => {
     let { Doctortoken } = req.cookies;
-      
+
     if (Doctortoken) {
-            let decode = jwt.verify(Doctortoken, process.env.DoctorSecrate);
-            req.body.DoctorID = decode.id;
-            next();
+        let decode = jwt.verify(Doctortoken, process.env.DoctorSecrate);
+        req.body.DoctorID = decode.id;
+        next();
     } else {
         res.status(403).json("You are not authorized");
     }
@@ -112,4 +152,4 @@ const AuthPatientOrDoctor = (req, res, next) => {
     }
 };
 
-module.exports = { Auth, AdminAuth,DoctorAuth ,AuthDoctorOrAdmin,AuthPatientOrAdmin,AuthPatientOrDoctor};
+module.exports = { Auth, AdminAuth, DoctorAuth, AuthDoctorOrAdmin, AuthPatientOrAdmin, AuthPatientOrDoctor };

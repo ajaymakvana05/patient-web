@@ -1,3 +1,4 @@
+// src/App.js
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import MainSection from "./Components/MainSection";
 import RegistrationForm from "./Components/RegistrationForm";
@@ -17,46 +18,50 @@ import DoctorDashboard from "./pages/admin/DoctorDashboard";
 import PatientDashboard from "./pages/admin/PatientDashboard";
 import BillingDashboard from "./pages/admin/BillingDashboard";
 import ReportingDashboard from "./pages/admin/ReportingDashboard";
-import "react-toastify/dist/ReactToastify.css";
-// import ChangePassword from "./Components/ChangePassword";
+import { UserProvider } from "./context/UserContext";
+import ProtectedRoute from "./Components/ProtectedRoute"; 
 
 const App = () => {
   return (
-    <Router>
-      <div className="main-layout">
-        <ToastContainer
-          position="top-right" // or "bottom-right" for bottom placement
-          autoClose={1000} // Auto close after 3 seconds
-          hideProgressBar={false} // Show progress bar (optional)
-          newestOnTop={true} // Newest notifications on top
-          closeOnClick // Close on click
-          pauseOnHover // Pause on hover
-          draggable // Allow dragging the notification
-        />
-        <Routes>
-          <Route path="/" element={<MainSection />} />
-          <Route path="/register" element={<RegistrationForm />} />
-          <Route path="/login" element={<Login />} />
-          <Route path="/forgetpassword" element={<ForgotPassword />} />
-          <Route path="/getotp" element={<GetOTP />} />
-          <Route path="/adminregistration" element={<AdminRegistration />} />
-          <Route path="/changepassword" element={<ChangePassword />} />
+    <UserProvider>
+      <Router>
+        <div className="main-layout">
+          <ToastContainer
+            position="top-right" 
+            autoClose={1000}
+            hideProgressBar={false} 
+            newestOnTop={true} 
+            closeOnClick 
+            pauseOnHover 
+            draggable 
+          />
+          <Routes>
+            <Route path="/" element={<MainSection />} />
+            <Route path="/register" element={<RegistrationForm />} />
+            <Route path="/login" element={<Login />} />
+            <Route path="/forgetpassword" element={<ForgotPassword />} />
+            <Route path="/getotp" element={<GetOTP />} />
+            <Route path="/adminregistration" element={<AdminRegistration />} />
+            <Route path="/changepassword" element={<ChangePassword />} />
 
-          <Route path="/profiledashboard" element={<ProfileDashboard />}>
-            <Route index path="profile" element={<Profile />} />
-            <Route path="changepassword" element={<ChangePassword />} />
-            <Route path="editprofileform" element={<EditProfileForm />} />
-            <Route path="termsandconditions" element={<TermsAndConditions />} />
-            <Route path="privacypolicy" element={<PrivacyPolicy />} />
-          </Route>
+            {/* Secure Profile Dashboard */}
+            <Route path="/profiledashboard" element={<ProtectedRoute><ProfileDashboard /></ProtectedRoute>}>
+              <Route index path="profile" element={<ProtectedRoute><Profile /></ProtectedRoute>} />
+              <Route path="changepassword" element={<ProtectedRoute><ChangePassword /></ProtectedRoute>} />
+              <Route path="editprofileform" element={<ProtectedRoute><EditProfileForm /></ProtectedRoute>} />
+              <Route path="termsandconditions" element={<ProtectedRoute><TermsAndConditions /></ProtectedRoute>} />
+              <Route path="privacypolicy" element={<ProtectedRoute><PrivacyPolicy /></ProtectedRoute>} />
+            </Route>
 
-          <Route path="/doctordashboard" element={<DoctorDashboard />} />
-          <Route path="/patientdashboard" element={<PatientDashboard />} />
-          <Route path="/billingdashboard" element={<BillingDashboard />} />
-          <Route path="/reportingdashboard" element={<ReportingDashboard />} />
-        </Routes>
-      </div>
-    </Router>
+            {/* Secure Dashboard Routes */}
+            <Route path="/doctordashboard" element={<ProtectedRoute><DoctorDashboard /></ProtectedRoute>} />
+            <Route path="/patientdashboard" element={<ProtectedRoute><PatientDashboard /></ProtectedRoute>} />
+            <Route path="/billingdashboard" element={<ProtectedRoute><BillingDashboard /></ProtectedRoute>} />
+            <Route path="/reportingdashboard" element={<ProtectedRoute><ReportingDashboard /></ProtectedRoute>} />
+          </Routes>
+        </div>
+      </Router>
+    </UserProvider>
   );
 };
 

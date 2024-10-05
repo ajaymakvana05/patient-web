@@ -1,8 +1,5 @@
-import React from "react";
 import Sidebar from "../../Components/Sidebar";
 import Header from "../../Components/Header";
-import { Outlet, Route, Routes } from "react-router-dom";
-import Profile from "../../Components/Profile";
 
 const ProfileDashboard = () => {
   return (
